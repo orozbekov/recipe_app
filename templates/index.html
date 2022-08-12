@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | TheGoodFood{% endblock %}
+  {% block content %}
+
+      <!-- main -->
+    <main class="page">
+      <div class="slider">
+        <div class="slides">
+           <input type="radio" name="radio-btn" id="radio1" checked>
+           <input type="radio" name="radio-btn" id="radio2">
+           <input type="radio" name="radio-btn" id="radio3">
+           <input type="radio" name="radio-btn" id="radio4">
+           <input type="radio" name="radio-btn" id="radio5">
+
+           <div class="slide first">
+              <img src="{% static 'img/recipes/recipe-1.jpeg' %}" alt="">
+           </div>
+           <div class="slide">
+              <img src="{% static 'img/recipes/recipe-2.jpeg' %}" alt="">
+           </div>
+
+           <div class="slide">
+              <img src="{% static 'img/recipes/recipe-3.jpeg' %}" alt="">
+           </div>
+
+           <div class="slide">
+              <img src="{% static 'img/recipes/recipe-4.jpeg' %}" alt="">
+           </div>
+
+            <div class="slide">
+              <img src="{% static 'img/recipes/recipe-4.jpeg' %}" alt="">
+           </div>
+
+           <div class="navigation-auto">
+              <div class="auto-btn1"></div>
+              <div class="auto-btn2"></div>
+              <div class="auto-btn3"></div>
+              <div class="auto-btn4"></div>
+              <div class="auto-btn5"></div>
+           </div>
+
+        </div>
+
+        <div class="navigation-manual">
+           <label for="radio1" class="manual-btn"></label>
+           <label for="radio2" class="manual-btn"></label>
+           <label for="radio3" class="manual-btn"></label>
+           <label for="radio4" class="manual-btn"></label>
+           <label for="radio5" class="manual-btn"></label>
+        </div>
+    </div>
+      <hr>
+      <section class="recipes-container">
+        <!-- tag container -->
+        <div class="tags-container">
+          <h4>Категории</h4>
+          <div class="tags-list">
+            {% if category %}
+              {% for el in category %}
+                <a href="{% url 'tag-template' %}">{{ el.title }}</a>
+              {% endfor %}
+            {% else %}
+              <a href="{% url 'tag-template' %}">У вас нет записей.</a>
+            {% endif %}
+          </div>
+        </div>
+        <!-- end of tag container -->
+        <!-- recipes list -->
+        <div class="recipes-list">
+          <!-- single recipe -->
+          {% for recipe in recipe %}
+            <a href="{% url 'single-recipe' recipe.slug %}" class="recipe">
+              <img
+                src="{{ recipe.image.url }}"
+                class="img recipe-img"
+                alt=""
+              />
+              <h5 class="link">{{ recipe.name }}</h5>
+              <p>Подготовка : {{ recipe.prep }}мин | Приготовление : {{ recipe.cook }}min</p>
+            </a>
+          {% endfor %}
+        </div>
+        <!-- end of recipes list -->
+      </section>
+    </main>
+    <!-- end of main -->
+  {% endblock %}
+
+
+
+<!--  -->

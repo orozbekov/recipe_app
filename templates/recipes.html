@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Recipes|TheGoodFood{% endblock %}
+{% block content %}
+    <!-- main -->
+    <main class="page">
+      <section class="recipes-container">
+        <!-- tag container -->
+        <div class="tags-container">
+          <h4>Категории</h4>
+          <div class="tags-list">
+            {% if categories %}
+              {% for category in categories %}
+                <a href="{% url 'tag-template' %}">{{ category.title }}</a>
+              {% endfor %}
+            {% else %}
+              <a href="{% url 'tag-template' %}">У вас нет записей.</a>
+            {% endif %}
+          </div>
+        </div>
+        <!-- end of tag container -->
+        <!-- recipes list -->
+        <div class="recipes-list">
+          <!-- single recipe -->
+          {% for element in recipes_list %}
+          <a href="{% url 'single-recipe' element.slug %}" class="recipe">
+            <img
+              src="{{ element.image.url }}"
+              class="img recipe-img"
+              alt=""
+            />
+            <h5 class="link">{{ element.name }}</h5>
+            <p>Подготовка : {{ element.prep }}мин| Приготовление : {{ element.cook }}мин</p>
+          </a>
+          {% endfor %}
+          <!-- end of single recipe -->
+        </div>
+      </section>
+    </main>
+    <!-- end of main -->
+ {% endblock %}

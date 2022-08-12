@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Single-Recipe|TheGoodFood{% endblock %}
+{% block content %}
+    <main class="page">
+      <div class="recipe-page">
+        <section class="recipe-hero">
+          <img
+            src="{{ recipe.image.url }}"
+            class="img recipe-hero-img"
+          />
+          <article class="recipe-info">
+            <h2>{{ recipe.name }}</h2>
+            <p>
+              {{ recipe.description }}
+            </p>
+            <div class="recipe-icons">
+              <article>
+                <i class="fas fa-clock"></i>
+                <h5>Подготовка</h5>
+                <p>{{ recipe.prep }} min.</p>
+              </article>
+              <article>
+                <i class="far fa-clock"></i>
+                <h5>Приготовление</h5>
+                <p>{{ recipe.cook }} min.</p>
+              </article>
+            </div>
+            <p class="recipe-tags">
+              Tags : <a href="{% url 'tag-template' %}">{{ recipe.category }}</a>
+            </p>
+          </article>
+        </section>
+        <!-- content -->
+        <section class="recipe-content">
+          <article>
+            <h4>Пошаговая инструкция</h4>
+            <!-- single instruction -->
+            <div class="single-instruction">
+              <p>
+                {{ recipe.instructions|safe }}
+              </p>
+            </div>
+            <!-- end of single instruction -->
+          </article>
+          <article class="second-column">
+            <div>
+              <h4>Ингредиенты</h4>
+              {% for el in ingredients %}
+                <p class="single-ingredient">{{ el.ingredient }}</p>
+              {% endfor %}
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+{% endblock %}
